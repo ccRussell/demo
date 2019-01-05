@@ -20,7 +20,9 @@
 
 consumer接收数据的时候是按照group来接收，kafka确保每一个partition的数据只能由同一个group中的同一个consumer来进行消费。如果想要重复消费，则需要建立新的group进行，ZK中保存这每个topic下的每个partition在每个group中消费的offset 。
 
-对于同一个topic，kafka会对每一个group发送消息
+对于同一个topic，kafka会对每一个group发送消息。
+
+group是在创建consumer的过程中指定的，如果group不存在则自动创建group。也就是在生产者发送消息的时候只会指定topic。然后由group去订阅某个topic，在这个group下的consumer 实例会去消费这个topic，这个topic下的所有partitons会被consumer分配。假设我有4台机器去消费一个topic，这个topic有12个partiton，那么每台机器最好起3个线程，这样正好有12个线程去消费12个topic。
 
 #### consumer
 

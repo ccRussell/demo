@@ -1,18 +1,37 @@
-## Hbase安装与配置
+# Hbase安装与配置
 
-### 安装Hadoop
+[TOC]
 
-### 下载与安装
+### 一、Hbase基本概念
+
+[Hbase官网](http://hbase.apache.org/)
+
+### 二、安装Hadoop
+
+### 三、Hbase下载与安装
+
+- 版本：1.2.0
+- 安装包：hbase-1.2.0-cdh5.7.0.tar.gz
 
 ```shell
 ## 下载
 wget http://archive.cloudera.com/cdh5/cdh/5/hbase-1.2.0-cdh5.7.0.tar.gz
 
-## 安装
-tar -zvxf hbase-1.2.0-cdh5.7.0.tar.gz
+## 解压缩
+tar -zxf /root/demos/package/hbase-1.2.0-cdh5.7.0.tar.gz -C /root/demos/software/
+
+## 建立软连接
+ln -s /root/demos/software/hbase-1.2.0-cdh5.7.0/ /opt/
+mv hbase-1.2.0-cdh5.7.0 hbase
+
+## 配置环境变量
+vim /etc/profile
+export HBASE_HOME=/opt/hbase
+export PATH=$HBASE_HOME/bin:$PATH
+source /etc/profile
 ```
 
-### 配置
+**配置**
 
 ```shell
 ## 配置环境变量
@@ -29,7 +48,7 @@ vim hbase-site.xml
 
 ```shell
 ## 设置jdk home
-export JAVA_HOME=$JVAV_HOME
+export JAVA_HOME=/opt/jdk/
 
 ## 设置使用独立的ZK
 export HBASE_MANAGES_ZK=false
@@ -71,7 +90,7 @@ export HBASE_MANAGES_ZK=false
 | base.zookeeper.quorum     | ZK的地址                                   |
 | zookeeper.znode.parent    | ZK中的根目录                               |
 
-### 启动Hbase
+### 四、启动Hbase
 
 ```shell
 ## 进入bin目录
@@ -84,9 +103,9 @@ cd $HBASE_HOME/bin/
 hbase shell
 ```
 
-### 访问web页面
+**访问web页面**
 
 ```url
-http://localhost:60010
+http://47.98.189.100:60010
 ```
 

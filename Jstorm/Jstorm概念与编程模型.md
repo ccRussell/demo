@@ -36,15 +36,15 @@ jstorm将tuple的处理逻辑抽象为bolt，bolt可以消费任意数量的输�
 
 #### component的并行度
 
-在拓扑中设置spout和bolt的时候需要为其设置并行度，并行度的概念就是需要jstorm启动多少个task来消费这个组件（spout或者bolt）
+在拓扑中设置spout和bolt的时候需要为其设置并行度，并行度的概念就是需要jstorm启动多少个task来运行这个组件（spout或者bolt）
 
 这里我们使用一个实例来了解上述概念之间的关系：
 
 假设有一个4台机器的Jstorm集群，其中有一台主控节点nimbus，3台supervisor节点。这个集群上提交了一个testTopology的拓扑任务，拓扑包括一个spout和bolt，并发度分别设置为2和4。将任务的执行worker数设置为3，也就是需要3个工作进程来执行这个任务。
 
-jstorm的任务调度算法会将worker均匀的分布在集群中的supervisor中，在例子中，一个supervisor会分配到一个工作进程。由于拓扑包含一个spout和bolt，每个组件的并行度为3，一共需要6个task来执行。tasks会被均匀的分配到不同的worker。本例中每个worker会被分配2个线程。最终的架构如下：
+jstorm的任务调度算法会将worker均匀的分布在集群中的supervisor中，在例子中，一个supervisor会分配到一个工作进程。由于拓扑包含一个spout和bolt，每个组件的并行度为6，一共需要6个task来执行。tasks会被均匀的分配到不同的worker。本例中每个worker会被分配2个线程。最终的架构如下：
 
-![jstorm任务执行架构](/Users/liumenghao/github/Jstorm/picture/jstorm任务执行架构.png)
+![jstorm任务执行架构](/Users/liumenghao/github/demo/Jstorm/picture/jstorm任务执行架构.png)
 
 #### 创建一个拓扑（包含一个spout和bolt）
 

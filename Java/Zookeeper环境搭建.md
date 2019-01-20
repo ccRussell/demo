@@ -4,6 +4,8 @@
 
 ### 一、ZK介绍
 
+[zookeeper官网](https://zookeeper.apache.org/)
+
 ### 二、ZK安装（单机）
 
 **版本：**3.4.5
